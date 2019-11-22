@@ -67,6 +67,12 @@ def class A{
 }
 ```
 
+#### Constructor Properties
+Class constructors can declare constructor parameters that define a class member property. These parameters are called *constructor members*.
+```
+def class A(def string: String)
+```
+
 #### Data member property
 ```
 def data B{
