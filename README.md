@@ -1,6 +1,23 @@
 # Hypothetical Language Design Documents
 These documents are a collection of my thoughts on how to design a language that is lightweight, flexible, and user friendly like python, packed with powerful object oriented features like kotlin, with the added entity component system found in rust, as well as a simple way to manage resources by providing an interactive garbage collector.
 
+### Table of Contents
+I recommend looking through the documents in this order.
+- [Environment](ENVIRONMENT.md)
+- [Definitions](DEFINITIONS.md)
+- [Properties](PROPERTIES.md)
+- [Functions](FUNCTIONS.md)
+- [Classes](CLASSES.md)
+- [Interfaces](INTERFACES.md)
+- [Enums](ENUMS.md)
+- [References](REFERENCES.md)
+- [Memory Management](MEMORY_MANAGEMENT.md)
+- [Data Structures](DATA_STRUCTURES.md)
+- [Traits](TRAITS.md)
+- [Abstract Types](ABSTRACT_TYPES.md)
+- [Polymorphic Programming with `?`](POLYMORPHISM.md)
+- [Organizing Modules](MODULES.md)
+
 The idea behind a new language like this is to take the philosophy of Kotlin/Multiplatform for enterprise applications and applying it to a very particular type of enterprise software: consumer driven automated software.
 
 ## Consumer Driven Automation
