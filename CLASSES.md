@@ -94,12 +94,196 @@ def mod A{
         println(b.string) //Valid
     }
 }
-```
 
-```
+//Somewhere else
+
 import A
 def b = B()
 aFun(b)
 println(b.number) //Valid
 println(b.string) //Invalid; module private class member access attempted
+```
+
+#### Protected Members
+Protected members are only ever accessible from within its containing [type](ABSTRACT_TYPES.md) ([class](CLASSES.md), or [data structure](DATA_STRUCTURES.md)) and all subtypes (for classes, and types). Traits are not considered types but this also applies to trait members.
+```
+//Abstract type protected example
+def type SomeType{
+    protected def number: Int
+    def fun doSomething
+}
+
+//Class protected implementation
+def interface SomeInterface: SomeType{
+    protected def flag: Boolean
+}
+
+def class A: SomeInterface{
+    override def number: Int = 5
+    override def flag = true
+    def string = "This is a public class member"
+
+    override def fun doSomething{
+        println(this.number) //Valid
+        println(this.flag) //Valid
+        println(this.string) //Valid
+    }
+}
+
+//Data structure protected example
+def trait DataTrait{
+    protected def flag: Boolean
+}
+
+def data B: SomeType, DataTrait{
+    override def number: Int = 10
+    override def flag = false
+    def string = "This is a public data structure member"
+
+    override def fun doSomething{
+        println(this.number) //Valid
+        println(this.flag) //Valid
+    }
+}
+
+def a = A()
+a.doSomething() //Valid
+println(a.string) //Valid
+println(a.flag) //Invalid; Protected member
+println(a.number) //Invalid; Protected member
+def b = B()
+b.doSomething() //Valid
+println(b.string) //Valid
+println(b.flag) //Invalid; Protected member
+println(b.number) //Invalid; Protected member
+```
+
+### Inheritance
+Inheritance is a way of specifying a type hierarchy. This type hierarchy allows you to build types out of already existing types. These types can range from [abstract types](ABSTRACT_TYPES.md) to [class interfaces](INTERFACES.md). Classes use a Class Inheritance System (CIS) as opposed to [data structures](DATA_STRUCTURES.md) which use an Entity Component System (ECS).
+
+Classes can inherit from [abstract types](ABSTRACT_TYPES.md) and [interfaces](INTERFACES.md). However, they can not inherit from [traits](TRAITS.md). Traits are not types, so therefore, non-inheritable, unlike with [data structures](DATA_STRUCTURES.md).
+```
+def type SomeType{
+    def string = "Hello world"
+}
+
+def interface SomeInterface{
+    def number: Int
+}
+
+def class SomeClass: SomeType, SomeInterface{
+    override def number = 5
+}
+
+def sc = SomeClass()
+println(sc.string) //Prints "Hello world"
+println(sc.number) //Prints 5
+```
+
+### Companion Objects
+Currently my thoughts on companion objects are split between explicit companion objects like in Kotlin (with or without the *object* keyword)
+```
+def class A{
+    def companion object{
+        def string = "Statically accessed member property"
+        def doSomething{
+            println("Statically accessed member function")
+        }
+    }
+}
+
+def a = A()
+a.doSomething() //Invalid
+println(a.string) //Invalid
+A.doSomething() //Valid
+println(A.string) //Valid
+```
+Or by using a [singleton](SINGLETON.md) pattern and using the intrinsic property member *companion* to set the companion object, which will be resolved by the compiler.
+```
+def class A{
+    override def companion = def class{
+        def string = "Statically accessed members property"
+        def doSomething{
+            println("Statically accessed member function")
+        }
+    }
+}
+
+def a = A()
+a.doSomething() //Invalid
+A.doSomething() //Valid
+println(a.string) //Invalid
+println(A.string) //Invalid
+```
+In Kotlin, data classes can be destructured by intrinsically being given *component* functions, which are mapped to each data class member property.
+```Kotlin
+data class A(val x: Int, val y: Int){
+    //fun component1() = this.x
+    //fun component2() = this.y
+}
+
+fun main(){
+    val a = A(5, 10)
+    val (x, y) = a
+    println("x: $x")
+    println(y: $y)
+}
+```
+If we decide to do something similar with companion objects, it may be rather confusing even if we require a member property override. However, an explicit companion object definition may be more readable due to the explicit definition using the 
+`object` keyword. However, due to the general semantics of `object` in Kotlin, it may not really make sense to have this as a keyword just for companion objects. Since [singletons](SINGLETONS.md) are defined using a 
+*class reference*, it would make more sense to make companion objects an intrinsic class member property.
+
+### Open Classes
+An open class is a class that is open to overrides. This means you are not restricted to overriding abstract types and interfaces. By allowing concrete classes to be overridable, makes inheritance so much more flexible and powerful.
+```
+def open class A{
+    def string = "Hello beautiful world"
+}
+
+def class B : A(){
+    override def string = "Goodbye cruel world!"
+}
+
+def a = A()
+def b = B()
+println(a.string) //Prints "Hello beautiful world"
+println(b.string) //Prints "Goodbye cruel world!"
+```
+
+### Abstract Classes
+Sometimes you need a class to be abstract. Without an abstract class you're limited to having your abstractions be either [abstract types](ABSTRACT_TYPES.md) or [interfaces](INTERFACES.md).
+```
+def abstract class A{
+    abstract def string: String
+    def number = 5
+
+    abstract def fun someAbstractFunction(number: Int)
+}
+
+def class B: A(){
+    override def string: String = "Hello world!"
+
+    override def fun someAbstractFunction(number: Int){
+        this.string += number
+        println(this.string)
+    }
+}
+```
+Using the `abstract` keyword allows you to set a class and any of its members to be abstract. Any inheriting classes must provide a concrete implementation of these members. The `abstract` keyword only applies to CIS types, like interfaces. This cannot be applied to [data structures](DATA_STRUCTURES.md), [traits](TRAITS.md), or [abstract types](ABSTRACT_TYPES.md). An abstract type is not the same as an abstract class.
+
+Abstract classes, like [interfaces](INTERFACES.md), cannot be instantiated directly. They must be instantiated through an implementing class.
+
+```
+abstract def class A{
+    abstract def string: String
+}
+
+def class B : A(){
+    override def string = "Hello world!"
+}
+
+def a = A() //Invalid; attempt to instantiate abstract class
+def b = B() //Valid
+println(a.string) //Invalid; no concrete implementation of string
+println(b.string) //Valid; string has a concrete implementation; prints "Hello world!"
 ```
