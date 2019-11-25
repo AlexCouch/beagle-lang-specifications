@@ -41,6 +41,23 @@ def class A(string: String //Primary constructor){
 ```
 A non-primary constructor can be defined like above. There is no limit on these non-primary constructors, as long as a primary constructor exists, and that primary construct is called by any non-primary constructor.
 
+#### Class Deconstructors
+A class can have a deconstructor, which is invoked when the [smart memory manager](MEMORY_MANAGEMENT.md) tries to deconstruct and deallocate the class instance. This is good for calling cleanup functions that your class may need to do at the end of its life.
+```
+def class A{
+    init{
+        //Startup
+    }
+
+    deinit{
+        //cleanup
+    }
+}
+```
+
+### Class Members
+Classes can have members that are either uniquely defined in the classes, overrides of a parent class, or a concrete implementation of an abstract member.
+
 #### Class Member Properties
 A class can have member [properties](PROPERTIES.md) just the same way that you declare any other property. This property only exists within the scope of this class instance.
 ```
@@ -49,11 +66,38 @@ def class A{
 }
 ```
 
+A class can override a parent class's member property as long as it has the appropriate [access](#Encapsulation).
+```
+def open class A{
+    def open string = "Hello world!"
+}
+
+def class B : A(){
+    override def string = "Goodbye cruel world!"
+}
+```
+
 #### Class Member Functions
 A class can have member [functions](FUNCTIONS.md) just the same way that you declare any other function. This function only exists within the scope of this class instance.
 ```
 def class A{
     def fun aFun{
+        //Do stuff
+    }
+}
+```
+
+Class member functions are final by default, so allowing child classes to override a member function, the ``open`` keyword is required.
+
+```
+def open class A{
+    def open fun aFun{
+        //Do stuff
+    }
+}
+
+def class B : A(){
+    override def aFun{
         //Do stuff
     }
 }
@@ -178,6 +222,67 @@ def class SomeClass: SomeType, SomeInterface{
 def sc = SomeClass()
 println(sc.string) //Prints "Hello world"
 println(sc.number) //Prints 5
+```
+
+Classes and all their members are final by default when in concrete implementations. [Interfaces](INTERFACES.md) and [abstract types](ABSTRACT_TYPES.md) are open by default, due to the logistics and technicalities of a non-concrete abstraction.
+
+#### Calling Parent Specific Members
+When calling a parent class specific member, use of the ``super`` keyword is required.
+```
+def open class A{
+    def fun anotherFun{
+        //Do stuff
+    }
+}
+
+def class B : A(){
+    def fun myFun{
+        super.anotherFun()
+        //Do stuff
+    }
+}
+```
+
+This can also be achieved using ``this`` but ``super`` denotes the parent class's implementation rather than an override in the containing class.
+
+```
+def open class A{
+    def fun anotherFun{
+        //Do stuff
+    }
+
+    def open fun myFun{
+        this.anotherFun()
+        //Do stuff
+    }
+}
+
+def class B : A(){
+    override def fun myFun{
+        super.myFun()
+        //Do stuff
+    }
+}
+```
+
+#### Override Properties
+This also goes for properties.
+```
+def open class A{
+    def open string = "Hello world!"
+}
+
+def class B : A(){
+    override def string = "Goodbye cruel world!"
+}
+```
+Override a property allows you to call a parent specific property getter or setter just like functions.
+```
+def open class A{
+    def open string = "Hello world!"
+}
+
+def class B
 ```
 
 ### Companion Objects

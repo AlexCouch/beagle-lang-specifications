@@ -60,7 +60,7 @@ Program properties allow you to keep track of the state of the program. Program 
 ### Object Member Properties
 There are two types of [object](OBJECTS.md) member properties: class member properties, and data structure member properties. [Class](CLASSES.md) member properties are property members of a class. They only exist within the context of a containing class, similar to a data property. A data structure member property is a property member of a [data structure](DATA_STRUCTURES.md). Both of these are essentially the same. The difference is the context. Both have getters, setters, and heap allocation.
 
-#### Class member property
+#### Class Member Properties
 ```
 def class A{
     def number = 0
@@ -73,7 +73,7 @@ Class constructors can declare constructor parameters that define a class member
 def class A(def string: String)
 ```
 
-#### Data member property
+#### Data Structure Member Properties
 ```
 def data B{
     def string = ""

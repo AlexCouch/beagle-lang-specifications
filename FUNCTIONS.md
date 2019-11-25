@@ -6,6 +6,7 @@ Functions can be defined in any context, including, but not limited to:
 4. [Interfaces](INTERFACES.md)
 5. [Local](#Local-Functions)
 6. [Traits](TRAITS.md)
+7. [Abstract Types](ABSTRACT_TYPES.md)
 
 Functions can be defined in several different ways, including, but not limited to:
 1. [Dynamic functions](DUCK_TYPING.md#Dynamic-Functions)
@@ -34,6 +35,14 @@ def fun myFunction(five: Int, string: String){
     //Do stuff
 }
 ```
+Functions can have default arguments.
+```
+def fun myFunction(five: Int = 5, string: String){
+    //Do stuff
+}
+
+myFunction("Hello world!") //No need to pass in an argument for 'five' parameter
+```
 
 #### Function References
 You can create a function reference by [nesting its definition](DEFINITIONS.md#Definition-Nesting) inside a property definition.
@@ -55,6 +64,41 @@ def myFunRefrence = def fun(number: Int, string: String){
 A function type is a way of specifying the structure of a function. This is exactly the same as in Kotlin.
 ```
 def myFunType: (Int, String) -> Unit
+```
+
+#### Higher-Order Functions
+A function can be *higher order* if at least one of its parameters is a *function type*.
+```
+def myHigherOrderFun(callback: (String) -> Int){
+    def lengthOfString = callback("Hello world") //Will return length of "Hello world!"
+    println(lengthOfString) //Print the length of "Hello world!"
+}
+
+myHigherOrderFun{ string ->
+    string.length() //Return string.length
+}
+```
+A higher order function can receive a lambda function in one of three ways.
+```
+def myHigherOrderFun(string: String = "Default string", callback: (String) -> Int){
+    def lengthOfString = callback(string) //Will return length of string parameter
+    println(lengthOfString) //Print the length of string parameter
+}
+
+//Enclosed by function call parentheses
+myHigherOrderFun("Hello world!", {string -> 
+    string.length()
+})
+
+//Outside function parentheses
+myhigherOrderFun("Hello world!"){
+    string.length()
+}
+
+//Without function parentheses if no other arguments passed
+myHigherOrderFun{
+    string.length()
+}
 ```
 
 #### Storing A Callback In A Class
@@ -141,7 +185,7 @@ def mod F{
 ```
 
 #### Pass By Reference
-By default, everything is [pass by value](PASS_BY_REFERENCE_OR_VALUE.md). However, you can change that by specifying a reference to something in the function parameters using `def` and passing in a reference either implicitly or explicitly using the `ref` keyword.
+By default, everything is [pass by value](MEMORY_MANAGEMENT.md#Pass-By-Reference). However, you can change that by specifying a reference to something in the function parameters using `def` and passing in a reference either implicitly or explicitly using the `ref` keyword.
 ```
 def aRef = def a = A()
 def fun myFun(def a: A){
