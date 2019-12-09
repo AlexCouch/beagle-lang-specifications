@@ -1,7 +1,7 @@
 # Functions
 Functions can be defined in any context, including, but not limited to:
 1. [Classes](CLASSES.md)
-2. [Data structures](DATA_STRUCTURES.md)
+2. [Structs](STRUCTS.md)
 3. [Enums](ENUMS.md)
 4. [Interfaces](INTERFACES.md)
 5. [Local](#Local-Functions)
@@ -124,7 +124,7 @@ a.doSomething()
 ```
 
 #### Extension Functions
-An [extension](EXTENSIONS.md) function is a function that extends a class or data structure.
+An [extension](EXTENSIONS.md) function is a function that extends a class or struct.
 ```
 def class A(){
     def string = "Hello world"
@@ -147,7 +147,7 @@ def fun outer(){
 ```
 
 #### Member Functions
-A member function is a function that is a member of either a [class](CLASSES.md), [enum](ENUMS.md), [interface](INTERFACE.md), [trait](TRAITS.md), [data structure](DATA_STRUCTURE.md), or [module](MODULES.md).
+A member function is a function that is a member of either a [class](CLASSES.md), [enum](ENUMS.md), [interface](INTERFACE.md), [trait](TRAITS.md), [structs](STRUCTS.md), or [module](MODULES.md).
 ```
 def class A{
     def aFunc(){

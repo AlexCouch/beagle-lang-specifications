@@ -7,7 +7,7 @@ These design documents are my thoughts on designing a language that is:
         * Simple polymorphic programming
         * Ability to define a range of types
             - Classes for Class Inheritance typing
-            - Data structures of Data Composition typing
+            - Structs for Data Composition typing
     + Functional and Declarative Paradigms
 - Self Doumenting
     * Utilizes a state based compiler
@@ -16,7 +16,7 @@ These design documents are my thoughts on designing a language that is:
             + Properties
             + Functions
             + Classes (and relevant constructs)
-            + Data Structures (and relevant constructs)
+            + Structs (and relevant constructs)
             + Threads
             + Tasks (Coroutines)
 - Highly Debuggable 

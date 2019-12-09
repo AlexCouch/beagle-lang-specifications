@@ -41,7 +41,7 @@ def class A(string: String //Primary constructor){
 ```
 A non-primary constructor can be defined like above. There is no limit on these non-primary constructors, as long as a primary constructor exists, and that primary construct is called by any non-primary constructor.
 
-#### Class Deconstructors
+#### Deconstructors
 A class can have a deconstructor, which is invoked when the [smart memory manager](MEMORY_MANAGEMENT.md) tries to deconstruct and deallocate the class instance. This is good for calling cleanup functions that your class may need to do at the end of its life.
 ```
 def class A{
@@ -149,7 +149,7 @@ println(b.string) //Invalid; module private class member access attempted
 ```
 
 #### Protected Members
-Protected members are only ever accessible from within its containing [type](ABSTRACT_TYPES.md) ([class](CLASSES.md), or [data structure](DATA_STRUCTURES.md)) and all subtypes (for classes, and types). Traits are not considered types but this also applies to trait members.
+Protected members are only ever accessible from within its containing [type](ABSTRACT_TYPES.md) ([class](CLASSES.md), or [struct](STRUCTS.md)) and all subtypes (for classes, and types). Traits are not considered types but this also applies to trait members.
 ```
 //Abstract type protected example
 def type SomeType{
@@ -182,7 +182,7 @@ def trait DataTrait{
 def data B: SomeType, DataTrait{
     override def number: Int = 10
     override def flag = false
-    def string = "This is a public data structure member"
+    def string = "This is a public struct member"
 
     override def fun doSomething{
         println(this.number) //Valid
@@ -203,9 +203,9 @@ println(b.number) //Invalid; Protected member
 ```
 
 ### Inheritance
-Inheritance is a way of specifying a type hierarchy. This type hierarchy allows you to build types out of already existing types. These types can range from [abstract types](ABSTRACT_TYPES.md) to [class interfaces](INTERFACES.md). Classes use a Class Inheritance System (CIS) as opposed to [data structures](DATA_STRUCTURES.md) which use an Entity Component System (ECS).
+Inheritance is a way of specifying a type hierarchy. This type hierarchy allows you to build types out of already existing types. These types can range from [abstract types](ABSTRACT_TYPES.md) to [class interfaces](INTERFACES.md). Classes use a Class Inheritance System (CIS) as opposed to [structs](STRUCTS.md) which use an Entity Component System (ECS).
 
-Classes can inherit from [abstract types](ABSTRACT_TYPES.md) and [interfaces](INTERFACES.md). However, they can not inherit from [traits](TRAITS.md). Traits are not types, so therefore, non-inheritable, unlike with [data structures](DATA_STRUCTURES.md).
+Classes can inherit from [abstract types](ABSTRACT_TYPES.md) and [interfaces](INTERFACES.md). However, they can not inherit from [traits](TRAITS.md). Traits are not types, so therefore, non-inheritable, unlike with [structs](STRUCTS.md).
 ```
 def type SomeType{
     def string = "Hello world"
@@ -374,7 +374,7 @@ def class B: A(){
     }
 }
 ```
-Using the `abstract` keyword allows you to set a class and any of its members to be abstract. Any inheriting classes must provide a concrete implementation of these members. The `abstract` keyword only applies to CIS types, like interfaces. This cannot be applied to [data structures](DATA_STRUCTURES.md), [traits](TRAITS.md), or [abstract types](ABSTRACT_TYPES.md). An abstract type is not the same as an abstract class.
+Using the `abstract` keyword allows you to set a class and any of its members to be abstract. Any inheriting classes must provide a concrete implementation of these members. The `abstract` keyword only applies to CIS types, like interfaces. This cannot be applied to [structs](STRUCTS.md), [traits](TRAITS.md), or [abstract types](ABSTRACT_TYPES.md). An abstract type is not the same as an abstract class.
 
 Abstract classes, like [interfaces](INTERFACES.md), cannot be instantiated directly. They must be instantiated through an implementing class.
 
