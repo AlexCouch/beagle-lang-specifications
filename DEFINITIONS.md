@@ -87,3 +87,13 @@ def class A{
 def a = A()
 def myRef = ref a
 ```
+
+#### Defining A Rule
+Defining a [data validation rule](RULES.md) is very simple using the `rule` keyword.
+```
+def class A
+def class B
+def rule MyRule<A, B>(someRuleParam: Int){
+    //Do stuff
+}
+```

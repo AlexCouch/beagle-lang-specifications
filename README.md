@@ -32,7 +32,7 @@
     + [Defining a Macro](DEFINITIONS.md#Defining-A-Rule)
     + [Defining a Thread](DEFINITIONS.md#Defining-A-Thread)
     + [Defining a Task](DEFINITIONS.md#Defining-A-Task)
-    + []
+    + [Defining a Rule](DEFINITIONS.md#Defining-A-Rule)
 - [Properties](PROPERTIES.md)
     + [Basic Properties](PROPERTIES.md#Basic-Properties)
     + [Property Setters](PROPERTIES.md#Property-Setters)
