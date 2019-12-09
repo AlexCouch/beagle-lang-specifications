@@ -179,3 +179,6 @@
     + [Suspending Functions and Properties](Concurrency.md#Suspending-Functions-And-Properties)
         * [Async/Await Functions](Concurrency.md#Async-Await-Functions-In-Threads)
         * [Async/Await Properties](Concurrency.md#Async-Await-Properties)
+- [Data Validation Rules](RULES.md)
+    + [Defining a Rule](RULES.md)
+    + [Rule Dependencies/Chaining](RULES.md)
