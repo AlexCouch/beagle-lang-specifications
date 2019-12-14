@@ -1,0 +1,14 @@
+mod ModuleB, ModuleC
+
+def type A{
+	def string: String
+}
+def trait B{
+	def number: Int
+}
+def interface C{
+	def radius: Float32
+}
+
+ModuleB.printAC()
+ModuleC.printAB()

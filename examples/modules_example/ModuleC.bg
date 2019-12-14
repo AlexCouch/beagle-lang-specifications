@@ -1,0 +1,11 @@
+import ModuleA
+
+def struct ABImpl with ModuleA.A, ModuleA.B{
+	def impl string = "What's up?"
+	def impl number = 10
+}
+
+def fun printAB{
+	let ab = ABImpl()
+	println(ab.string + ' ${b.number}')
+}

@@ -1,0 +1,11 @@
+import ModuleA
+
+def class ACImpl: ModuleA.A(), ModuleA.C{
+	def impl string = "Hello world!"
+	def impl radius = 3.14
+}
+
+def fun printAC{
+	let ac = ACImpl()
+	println(ac.string)
+}

@@ -1,0 +1,55 @@
+//Basic class with no constructor nor body
+def class A
+//class with a member property
+def class A{
+	def string = "Hello world!"
+}
+//Class with a member function
+def class A{
+	def fun f{
+		println("Hello world!")
+	}
+}
+//Class with constructor parameters
+def class A(string: String)
+//Class with constructor member property
+def class A(def string: String)
+//Class with constructor member property and member function
+def class A(def string: String){
+	def fun f{
+		println(this.string)
+	}
+}
+//Class with constructor and constructor body
+def class A(string: String){
+	init{
+		println(this.string)
+	}
+}
+//Open class with open member property overridden
+def open class A{
+	def open string = "Hello world!"
+}
+def class B: A(){
+	def override string = "Goodbye everybody, I'll remember you all in therapy!"
+}
+//Abstract class with abstract member property and concrete implementation
+def abstract class A{
+	def abstract string: String
+}
+def class B: A(){
+	def impl string = "Hello world!"
+}
+//Class with abstract type implementation
+def type A{
+	def string: String
+}
+def class B: A(){
+	def impl string = "Hello world!"
+}
+//Class with dropper
+def class A{
+	drop{
+		println("Dropping instance of A from memory")
+	}
+}
