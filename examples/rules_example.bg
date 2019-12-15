@@ -1,0 +1,14 @@
+def rule SumLessThan<Collection<out Int>>(bound: Int){
+	let sum = 0
+	for(i in it){
+		sum += i
+	}
+	if(i >= bound){
+		raise "Sum of int collection cannot exceed $bound"
+	}
+}
+
+//Apply SumLessThan rule on intList
+def fun useIntList(intList: ArrayList<Int, $SumLessThan(10)>){
+	//Do stuff with int list
+}
