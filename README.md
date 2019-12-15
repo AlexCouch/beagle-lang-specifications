@@ -16,6 +16,7 @@
         * [Fundamental For-Loops](FLOW_CONTROL.md#Fundamental-For-Loops)
         * [Fundamental While-Loops](FLOW_CONTROL.md#Fundamental-While-Loops)
         * [Expression Based Looping](FLOW_CONTROL.md#Expression-Based-Looping)
+    + [Pattern Matching](FLOW_CONTROL.md#Pattern-Matching)
 - [Definitions](DEFINITIONS.md)
     + [Definitions as Expressions](DEFINITIONS.md#Definitions-As-Expressions)
     + [Defining a Property](DEFINITIONS.md#Defining-A-Property)
