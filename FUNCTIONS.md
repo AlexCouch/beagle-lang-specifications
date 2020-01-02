@@ -81,28 +81,6 @@ myHigherOrderFun{
 }
 ```
 
-#### Storing A Callback In A Class
-Storing a function callback inside a class member property would generally be like this:
-```ruby
-def class A{
-    def funReference: ((Int, String) -> Unit)? = None
-
-    def fun doSomething(){
-        this.funReference(5, "Hello world")
-    }
-}
-
-def myFunRef = def fun(number: Int, string: String){
-    println(number)
-    println(string)
-}
-
-def a = A()
-a.funReference = myFunRef
-//This should print 5 followed by "Hello world" on the next line
-a.doSomething()
-```
-
 #### Extension Functions
 An [extension](EXTENSIONS.md) function is a function that extends a class or struct.
 ```ruby
