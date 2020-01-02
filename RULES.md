@@ -36,8 +36,8 @@ def fun createUsername(username: @LenGreaterThan(5) String){
 createUsername("alex")
 ```
 
-#### Rule Dependencies
-Rules can be depend on each other so that one rule requires another rule to be validated against in order to succeed.
+#### Rule Chains
+Specifying a rulechain allows you to create an alias for a chain of rules to be executed in a certain order.
 
 ```ruby
 def rule RuleA(someInt: Int){
@@ -45,12 +45,12 @@ def rule RuleA(someInt: Int){
 }
 
 //This rule is done before RuleA
-def rule RuleB(someString: String) before RuleA(someString.length){
+def rule RuleB(someString: String){
     //Do some stuff
 }
 
 //RuleB is done before RuleC
-def rule RuleC(someStringIn: String) after RuleB(someStringIn){
+def rule RuleC(someStringIn: String){
     //Do stuff
 }
 
@@ -58,8 +58,9 @@ def rule RuleD(something: Float){
     //Do stuff
 }
 
-def rule RuleE(anotherThing: Float) before RuleD(anotherThing) after RuleC(anotherThing.toString()){
+def rule RuleE(anotherThing: Float){
     //Do stuff
 }
+
+def rulechain AThroughC(def val startingData: Int) = RuleA(startingData) -> RuleB(startingData.toString()) -> RuleC(startingData.toString())
 ```
-Specifying a rule dependency with `before` tells the compiler that this rule must execute before the next rule, with `after` being after the next rule.
