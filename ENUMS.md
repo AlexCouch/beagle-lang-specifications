@@ -47,19 +47,39 @@ def enum Message{
 
 They are all variations of the same type, as you can see. This is also really good for [pattern matching](CONTROL_FLOW.md#Pattern-Matching).
 
-#### Pattern Matching
+When directly calling an enum constant, you must complete it. If it is holding some kind of data, then give it the right data to hold.
+
 ```ruby
-def fun processMessage(message: Message){
+def fun sendTextMessage(user: @UserExistsInDatabase(database) User, message: String): Result<Unit>{
+    let sendResult = sendMessage(user, Message.Write(message)) //We are giving Message.Write the string object `message` to hold
+}
+
+def fun sendMessage(user: @UserOnline(database) User, message: Message): Result<Unit>{
     match(message){
-        Quit -> quitProgram()
-        Move(m) -> {
-            movePlayer(m)
+        Quit -> {
+            //Log user off server and quit the application
         }
-        Write(s) -> {
-            showMessage(s)
+        Move(m) -> {
+            def val (x, y) = m
+            //Do stuff with x and y
+        }
+        Write(mStr) -> {
+            let sendResult = someNetworkingApiInstance.sendEncodedMessage(user.ipAddress, mStr)
+            match(sendResult){
+                Ok() -> {
+                    return Ok()
+                }
+                Error(err) -> {
+                    let errorMessage = StringBuilder()
+                    errorMessage.append("An error occurred while trying to send encoded string message:\n\t")
+                    errorMessage.append(err)
+                    return Error(errorMessage.toString())
+                }
+            }
         }
         ChangeColor(r, g, b) -> {
-            changeColor(r, g, b)
+            let newColor = Color(r, g, b)
+            //Do stuff with color
         }
     }
 }
