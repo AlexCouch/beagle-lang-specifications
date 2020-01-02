@@ -5,7 +5,35 @@ The definition of a rule can be declared with input parameters for which to base
 ```ruby
 def rule LenGreaterThan<Sized>(size: Int){
     if(it.size < size){
-        raise "A minimum size of $size is required, but ${it.size} was found."
+        return Error("A minimum size of $size is required, but ${it.size} was found.")
+    }
+}
+
+def fun someOtherFunction(name: @LenGreaterThan(5) String): Result<Unit>{
+    //Do something
+}
+```
+This internally expands out to a regular generic function whose call is injected to the top of the calling function's body
+```ruby
+def fun <T> T.rule_LenGreaterThan(size: Int): RuleResult where T : Sized{
+    if(this.size < size){
+        return RuleResult.Error("A minimum size of $size is required, but ${it.size} was found.")
+    }
+    return RuleResult.Ok()
+}
+
+def fun someOtherFunction(name: String): Result<Unit>{
+    let ruleCheck_LenGreaterThanResult = name.rule_LenGreaterThan(5)
+    match(ruleCheck_LenGreaterThanResult){
+        Ok() -> {
+            //Rest of function body here
+        }
+        Error(message) -> {
+            let errorMessage = StringBuilder()
+            errorMessage.append("Data validation failed while checking LenGreaterThan on String object `name`:\n\t")
+            errorMessage.append(message)
+            return Result.Error(errorMessage.toString())
+        }
     }
 }
 ```
@@ -20,20 +48,19 @@ def class A: Sized{
 ```
 On-site usage of a data validation rule is done in the type annotation.
 ```ruby
-//Line 151 in user_data.bg
-def fun createUsername(username: @LenGreaterThan(5) String){
+def fun createUser(username: @LenGreaterThan(5) String): Result<User>{
     //Create username
 }
-//This would raise an exception detailing the string object "alex" violating the string validation rule LenGreaterThan
-//Data Validation Failure:
-//  Line 32 in File `create_user.bg`
-//  `username` violated data validation rules:
-//      Line 151 in user_data.bg
-//      LenGreaterThan on type String
-//      Rule violation message:
-//          "A minimum length of 5 is required, but 4 was found."
-//Line 32 in file create_user.bg
-createUsername("alex")
+def val createUsernameResult = createUsername("alex")
+match(createUsernameResult){
+    Ok(user) -> {
+        //Do something with the new user object
+    }
+    Error(message) -> {
+        critical("An error occurred while creating username:\n\t")
+        critical(message)
+    }
+}
 ```
 
 #### Rule Chains
@@ -62,5 +89,5 @@ def rule RuleE(anotherThing: Float){
     //Do stuff
 }
 
-def rulechain AThroughC(def val startingData: Int) = RuleA(startingData) -> RuleB(startingData.toString()) -> RuleC(startingData.toString())
+def rulechain AThroughC(startingData: Int) = RuleA(startingData) -> RuleB(startingData.toString()) -> RuleC(startingData.toString())
 ```
