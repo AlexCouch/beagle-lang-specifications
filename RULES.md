@@ -21,7 +21,7 @@ def class A: Sized{
 On-site usage of a data validation rule is done in the type annotation.
 ```ruby
 //Line 151 in user_data.bg
-def fun createUsername(username: String<LenGreaterThan(5)>){
+def fun createUsername(username: @LenGreaterThan(5) String){
     //Create username
 }
 //This would raise an exception detailing the string object "alex" violating the string validation rule LenGreaterThan

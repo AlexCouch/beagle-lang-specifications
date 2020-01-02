@@ -33,8 +33,8 @@ Enum constants don't have to represent one piece of data; they can have all sort
 def enum Message{
     Quit,
     Move struct{
-        def x: Int32
-        def y: Int32
+        def val x: Int32
+        def val y: Int32
     },
     Write(String),
     ChangeColor(Int32, Int32, Int32)
@@ -53,10 +53,6 @@ def fun processMessage(message: Message){
     match(message){
         Quit -> quitProgram()
         Move(m) -> {
-            //m = struct { 
-            //             x: Int32 
-            //             y: Int32
-            //           }
             movePlayer(m)
         }
         Write(s) -> {
