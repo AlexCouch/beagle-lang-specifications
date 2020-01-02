@@ -140,3 +140,19 @@ def class GameServer{
     def val playerRegistry = PlayerRegistry()
 }
 ```
+
+#### Defining a Thread
+Threads can be defined using the ``thread`` keyword
+```ruby
+def thread MyThread{
+    //Thread stuff
+}
+```
+
+#### Defining a Task
+Tasks (or coroutines) can be defined using the `task` keyword
+```ruby
+def task MyTask{
+    //Task stuff
+}
+```
