@@ -1,5 +1,5 @@
 # Enums
-Enums are way of creating constants that share the same type. This allows for pattern matching. Enums allow you to store like information in a way that allows you to distinguish between the variations of like data.
+Enums are a way of creating a fixed set of tags and the type of data those tags can represent. This allows for pattern matching. Enums allow you to store tagged data in a way that allows you to functionally match patterns against them as a form of control flow.
 ```ruby
 def enum IpAddress{
     IPv4,
