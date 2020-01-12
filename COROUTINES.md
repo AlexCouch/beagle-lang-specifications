@@ -66,7 +66,7 @@ def task MyTask{
 }
 ```
 
-#### Creating, Launching, and Canceling Threads
+#### Creating, Launching, and Canceling Tasks
 Creating a task object is the same as creating any other object, since tasks are expanded out to structs.
 ```ruby
 def val myTask = MyTask(user)
