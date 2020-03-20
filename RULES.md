@@ -37,7 +37,7 @@ def fun someOtherFunction(name: String): Result<Unit>{
     }
 }
 ```
-To tell the Beagle compiler to allow a type to be validated against defined rules, you use a [`using` clause](USING_CLAUSES.md#Using-Rules).
+To tell the Beagle compiler to allow a type to be validated against defined rules, you use a generic-like syntax, and any types that inherit/implement that type can have the rule checked against an object of it.
 ```ruby
 def class A: Sized{
     def size: UInt32 get(){
@@ -61,33 +61,4 @@ match(createUsernameResult){
         critical(message)
     }
 }
-```
-
-#### Rule Chains
-Specifying a rulechain allows you to create an alias for a chain of rules to be executed in a certain order.
-
-```ruby
-def rule RuleA(someInt: Int){
-    //Do some stuff
-}
-
-//This rule is done before RuleA
-def rule RuleB(someString: String){
-    //Do some stuff
-}
-
-//RuleB is done before RuleC
-def rule RuleC(someStringIn: String){
-    //Do stuff
-}
-
-def rule RuleD(something: Float){
-    //Do stuff
-}
-
-def rule RuleE(anotherThing: Float){
-    //Do stuff
-}
-
-def rulechain AThroughC(startingData: Int) = RuleA(startingData) -> RuleB(startingData.toString()) -> RuleC(startingData.toString())
 ```
