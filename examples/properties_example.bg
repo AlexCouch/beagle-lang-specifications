@@ -1,29 +1,29 @@
 // property with type inference
-def stringInferred = "Hello world!"
+val stringInferred = "Hello world!"
 // property without type inference
-def stringNoInfer: String = "Hello world!"
+val stringNoInfer: String = "Hello world!"
 // property with mutability
-def mut mutableString = "Hello world!"
+var mutableString = "Hello world!"
 // property with custom getter expression
-def stringGetter: String
+val stringGetter: String
 	get() = "Hello world!"
 // property with custom getter with function body
-def stringGetterBody: String
+val stringGetterBody: String
 	get(){
 		println("Getting string")
 		return "Hello world!"
 	}
 // mutable property with custom setter
-def mut stringSetter = "Hello world!"
+var stringSetter = "Hello world!"
 	set(new){
 		println("Setting a different string")
 		field = new
 	}
 // mutable property with custom getter and backing field
-def mut mutableStringGetter = "Hello world!"
+var mutableStringGetter = "Hello world!"
 	get() = "A different string"
 // mutable property with custom getter, setter, and backing field
-def mut mutableStringAll = "Hello world!"
+var mutableStringAll = "Hello world!"
 	get() = "A different string"
 	set(new){
 		println("Setting a different string")

@@ -1,10 +1,10 @@
 # Def Macros
 Def macros give you the ability to create your own *definable construct*. This means that you can create syntactic sugar for a common type or range of types in an API. It also makes API maintanance easier since you're less likely to break dependants' code if API undergoes architecture changes.
-```c#
-def defmacro entity{
+```kt
+defmacro entity{
     //Users can create constructors
     canHaveConstructor = true
-    //A definable construct that means this entity has a ticking mechanism
+    //A definition attribute that means this entity has a ticking mechanism
     val tickableAttr = createAttribute("tickable")
     //Intrinsic properties methods that are treated as first class, and can be used as syntactic sugar
     intrinsics{
@@ -23,7 +23,7 @@ def defmacro entity{
 }
 ```
 As long as the relavent types are supplied in this hypothetical API, a user can theoretically use this defmacro like this:
-```ruby
+```kt
 def tickable entity Pig(val pigName: String){
     onSpawn{
         //Do stuff on spawn

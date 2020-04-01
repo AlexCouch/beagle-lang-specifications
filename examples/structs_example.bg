@@ -1,44 +1,44 @@
 //Basic struct
-def struct A
+struct A
 //Struct with member property
-def struct A{
-	def string = "Hello world!"
+struct A{
+	val string = "Hello world!"
 }
 //Struct with member function
-def struct A{
-	def fun f{
+struct A{
+	fun f{
 		println("Hello world!")
 	}
 }
 //Struct with constructor parameters
-def struct A(string: String)
+struct A(string: String)
 //Struct with constructor member property
-def struct A(def string: String)
+struct A(val string: String)
 //Struct with constructor member property and member function
-def struct A(def string: String){
-	def fun f{
+struct A(val string: String){
+	fun f{
 		println(this.string)
 	}
 }
 //Struct with constructor and constructor body
-def struct A(string: String){
+struct A(string: String){
 	init{
 		println(string)
 	}
 }
 //Struct with trait implementation
-def trait T1{
-	def string: String
+trait T1{
+	val string: String
 }
-def struct A with T1{
-	def impl string: String = "Hello world!"
+struct A with T1{
+	impl val string: String = "Hello world!"
 }
 //Struct with abstract type implementation
-def type A{
-	def string: String
+type A{
+	val string: String
 }
 def struct B with A{
-	def impl string = "Hello world!"
+	impl val string = "Hello world!"
 }
 //Struct with dropper
 def struct A{

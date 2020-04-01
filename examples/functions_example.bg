@@ -1,50 +1,50 @@
 //Basic function with no parameters or return type
-def fun basicFun{
+fun basicFun{
 	println("Basic function. This has no parameters.")
 }
 //Basic function with no parameters but has a return type
-def fun funWithReturn: String{
+fun funWithReturn: String{
 	return "Basic function with return. THis has no parameters!"
 }
 //Basic function with parameters but no return type
-def fun funWithParams(string: String){
+fun funWithParams(string: String){
 	println(string)
 }
 //Basic function with parameters and a return type
-def fun funWithParamsAndReturnType(string: String): Int{
+fun funWithParamsAndReturnType(string: String): Int{
 	return string.length
 }
 //Basic function expression with parameters and a return type
-def fun funExpression(string: String): Int = string.length
+fun funExpression(string: String): Int = string.length
 //Function expression with parameters and an inferred return type
-def fun funInferredExpression(string: String) = string.length
+fun funInferredExpression(string: String) = string.length
 //Extension function
-def fun A.extensionFunction{
+fun A.extensionFunction{
 	println("This extends to A")
 }
 //Higher order function with no return type
-def fun higherOrderFun(callback: ()->None){
+fun higherOrderFun(callback: ()->None){
 	callback()
 }
 //Higher order function with return type
-def fun higherOrderFunWithReturnType(callback: ()->None): String{
+fun higherOrderFunWithReturnType(callback: ()->None): String{
 	callback()
 	return "success!"
 }
 //Higher order function with function type with parameter
-def fun higherOrderFunWithFunTypeParam(callback: (String)->None){
+fun higherOrderFunWithFunTypeParam(callback: (String)->None){
 	callback("Hello world!")
 }
 //Higher order function with function type with return type
-def fun higherOrderFunWithFunTypeReturnType(callback: ()->String){
+fun higherOrderFunWithFunTypeReturnType(callback: ()->String){
 	println(callback())
 }
 //Higher order function with function type with param and return type
-def fun higherOrderFunWithFunTypeWithParamAndReturnType(callback: (String)->Int){
+fun higherOrderFunWithFunTypeWithParamAndReturnType(callback: (String)->Int){
 	println(callback("Hello world!"))
 }
 //Scope function
-def fun scopeFunction(callback: A.()->None){
+fun scopeFunction(callback: A.()->None){
 	let a = A() //Local variable of type A called 'a'
 	a.callback()
 }

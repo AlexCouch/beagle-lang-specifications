@@ -1,4 +1,4 @@
-def rule SumLessThan<Collection<out Int>>(bound: Int){
+def rule SumLessThan<Collection<Int>>(bound: Int){
 	let sum = 0
 	for(i in it){
 		sum += i
@@ -9,6 +9,6 @@ def rule SumLessThan<Collection<out Int>>(bound: Int){
 }
 
 //Apply SumLessThan rule on intList
-def fun useIntList(intList: ArrayList<Int, $SumLessThan(10)>){
+fun useIntList(intList: @SumLessThan(5) ArrayList<Int>){
 	//Do stuff with int list
 }

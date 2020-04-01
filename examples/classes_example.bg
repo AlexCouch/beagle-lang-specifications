@@ -1,54 +1,54 @@
 //Basic class with no constructor nor body
-def class A
+class A
 //class with a member property
-def class A{
-	def string = "Hello world!"
+class A{
+	val string = "Hello world!"
 }
 //Class with a member function
-def class A{
-	def fun f{
+class A{
+	fun f{
 		println("Hello world!")
 	}
 }
 //Class with constructor parameters
-def class A(string: String)
+class A(string: String)
 //Class with constructor member property
-def class A(def string: String)
+class A(val string: String)
 //Class with constructor member property and member function
-def class A(def string: String){
-	def fun f{
+class A(val string: String){
+	fun f{
 		println(this.string)
 	}
 }
 //Class with constructor and constructor body
-def class A(string: String){
+class A(string: String){
 	init{
 		println(this.string)
 	}
 }
 //Open class with open member property overridden
-def open class A{
-	def open string = "Hello world!"
+open class A{
+	open val string = "Hello world!"
 }
-def class B: A(){
-	def override string = "Goodbye everybody, I'll remember you all in therapy!"
+class B: A(){
+	override string = "Goodbye everybody, I'll remember you all in therapy!"
 }
 //Abstract class with abstract member property and concrete implementation
-def abstract class A{
-	def abstract string: String
+abstract class A{
+	abstract val string: String
 }
-def class B: A(){
-	def impl string = "Hello world!"
+class B: A(){
+	impl val string = "Hello world!"
 }
 //Class with abstract type implementation
-def type A{
-	def string: String
+type A{
+	val string: String
 }
-def class B: A(){
-	def impl string = "Hello world!"
+class B: A(){
+	impl val string = "Hello world!"
 }
 //Class with dropper
-def class A{
+class A{
 	drop{
 		println("Dropping instance of A from memory")
 	}

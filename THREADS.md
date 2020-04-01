@@ -18,12 +18,12 @@ def thread MyThread{
 }
 ```
 Threads are expanded internally to classes
-```ruby
-def class MyThread: Thread{
-    def fun start{
+```kt
+class MyThread: Thread{
+    fun start{
         //Do stuff on start
     }
-    def suspend fun join{
+    suspend fun join{
         //Do stuff on start
     }
 }
@@ -51,9 +51,9 @@ def thread MyThread{
 Since threads are expanded into classes internally, you can create members inside a thread just like a class
 ```ruby
 def thread MyThread{
-    def val messageQueue = Queue<Message>()
+    val messageQueue = Queue<Message>()
 
-    def fun queueMessage(message: Message){
+    fun queueMessage(message: Message){
         this.messageQueue.push(message)
     }
 }
@@ -61,13 +61,13 @@ def thread MyThread{
 
 #### Creating, Starting, and Joining Threads
 Creating a thread object is the same as creating any other object, since threads are expanded out to classes.
-```ruby
-def val myThread = MyThread(user)
+```kt
+val myThread = MyThread(user)
 ```
 Starting a thread is done by calling `start` on a thread object, which returns a ThreadResult
-```ruby
-def val myThread = MyThread(user)
-def val startResult = myThread.start()
+```kt
+val myThread = MyThread(user)
+val startResult = myThread.start()
 match(startResult){
     Ok() -> {
         //Do stuff
@@ -79,11 +79,11 @@ match(startResult){
 }
 ```
 Joining a thread is done by calling `join` on a thread object, which also returns a ThreadResult
-```ruby
-def val myThread = MyThread(user)
+```kt
+val myThread = MyThread(user)
 //Start thread
 //Later on
-def val joinResult = myThread.join()
+val joinResult = myThread.join()
 match(joinResult){
     Ok() -> {
         //Do stuff after join

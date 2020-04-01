@@ -9,20 +9,20 @@ def rule LenGreaterThan<Sized>(size: Int){
     }
 }
 
-def fun someOtherFunction(name: @LenGreaterThan(5) String): Result<Unit>{
+fun someOtherFunction(name: @LenGreaterThan(5) String): Result<Unit>{
     //Do something
 }
 ```
 This internally expands out to a regular generic function whose call is injected to the top of the calling function's body
-```ruby
-def fun <T> T.rule_LenGreaterThan(size: Int): RuleResult where T : Sized{
+```kt
+fun <T> T.rule_LenGreaterThan(size: Int): RuleResult where T : Sized{
     if(this.size < size){
         return RuleResult.Error("A minimum size of $size is required, but ${it.size} was found.")
     }
     return RuleResult.Ok()
 }
 
-def fun someOtherFunction(name: String): Result<Unit>{
+fun someOtherFunction(name: String): Result<Unit>{
     let ruleCheck_LenGreaterThanResult = name.rule_LenGreaterThan(5)
     match(ruleCheck_LenGreaterThanResult){
         Ok() -> {
@@ -38,20 +38,20 @@ def fun someOtherFunction(name: String): Result<Unit>{
 }
 ```
 To tell the Beagle compiler to allow a type to be validated against defined rules, you use a generic-like syntax, and any types that inherit/implement that type can have the rule checked against an object of it.
-```ruby
-def class A: Sized{
-    def size: UInt32 get(){
+```kt
+class A: Sized{
+    val size: UInt32 get(){
         //Some kind of size calculation algorithm here
         return field
     }
 }
 ```
 On-site usage of a data validation rule is done in the type annotation.
-```ruby
-def fun createUser(username: @LenGreaterThan(5) String): Result<User>{
+```kt
+fun createUser(username: @LenGreaterThan(5) String): Result<User>{
     //Create username
 }
-def val createUsernameResult = createUsername("alex")
+val createUsernameResult = createUsername("alex")
 match(createUsernameResult){
     Ok(user) -> {
         //Do something with the new user object
