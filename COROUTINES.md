@@ -23,14 +23,14 @@ def task MyTask{
 ```
 Tasks are expanded internally to structs
 ```ruby
-def struct MyTask with Task{
-    def fun launch{
+struct MyTask with Task{
+    fun launch{
         //Do stuff on launch
     }
-    def fun complete{
+    fun complete{
         //Do stuff on complete
     }
-    def suspend fun cancel{
+    suspend fun cancel{
         //Do stuff on cancel
     }
 }
@@ -58,9 +58,9 @@ def task MyTask{
 Since tasks are expanded into structs internally, you can create members inside a task just like a struct
 ```ruby
 def task MyTask{
-    def val messageQueue = Queue<Message>()
+    val messageQueue = Queue<Message>()
 
-    def fun queueMessage(message: Message){
+    fun queueMessage(message: Message){
         this.messageQueue.push(message)
     }
 }
@@ -68,13 +68,13 @@ def task MyTask{
 
 #### Creating, Launching, and Canceling Tasks
 Creating a task object is the same as creating any other object, since tasks are expanded out to structs.
-```ruby
-def val myTask = MyTask(user)
+```kt
+val myTask = MyTask(user)
 ```
 Launching a task is done by calling `launch` on a task object, which returns a TaskResult
-```ruby
-def val myTask = MyTask(user)
-def val launchResult = myTask.launch()
+```kt
+val myTask = MyTask(user)
+val launchResult = myTask.launch()
 match(startResult){
     Ok() -> {
         //Do stuff
@@ -86,9 +86,9 @@ match(startResult){
 }
 ```
 Canceling a task is done by calling `cancel` on a task object, which also returns a TaskResult
-```ruby
-def val myTask = MyTask(user)
-def val cancelResult = myTask.cancel()
+```kt
+val myTask = MyTask(user)
+val cancelResult = myTask.cancel()
 match(startResult){
     Ok() -> {
         //Do stuff
